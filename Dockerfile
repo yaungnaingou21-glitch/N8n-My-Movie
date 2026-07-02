@@ -2,12 +2,9 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 \
-    python3-pip \
-    python3-venv \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+ENV PATH="/sbin:/usr/sbin:/bin:/usr/bin:$PATH"
+
+RUN apk add --no-cache python3 py3-pip py3-virtualenv ffmpeg
 
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
